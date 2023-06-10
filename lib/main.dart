@@ -36,6 +36,7 @@ void main() {
   IconButtonThemeData iconButtonTheme = IconButtonThemeData(
     style: IconButton.styleFrom(
       fixedSize: const Size(40, 40),
+      iconSize: 16,
     ),
   );
 
@@ -70,8 +71,47 @@ void main() {
     iconColor: blueLight,
   );
 
+  ElevatedButtonThemeData elevatedButtonThemeData = ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      elevation: 0,
+      minimumSize: const Size.fromHeight(40),
+      textStyle: const TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+    ),
+  );
+
+  OutlinedButtonThemeData outlinedButtonThemeData = OutlinedButtonThemeData(
+    style: OutlinedButton.styleFrom(
+      elevation: 0,
+      minimumSize: const Size.fromHeight(40),
+      textStyle: const TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+    ),
+  );
+
   ThemeData darkTheme = ThemeData(
-    textTheme: GoogleFonts.rubikTextTheme(const TextTheme()),
+    textTheme: GoogleFonts.rubikTextTheme(
+      TextTheme(
+        titleMedium: TextStyle(
+          fontSize: 14,
+          color: whiteDark,
+        ),
+        titleSmall: TextStyle(
+          fontSize: 12,
+          color: whiteDark,
+        ),
+      ),
+    ),
     colorScheme: ColorScheme.dark(
       brightness: Brightness.dark,
       background: blackDark,
@@ -82,6 +122,8 @@ void main() {
       onPrimaryContainer: whiteLight,
       surface: blackLight,
       onSurface: whiteDark,
+      error: redLight,
+      errorContainer: redDark,
     ),
     scaffoldBackgroundColor: blackDark,
     appBarTheme: appBarTheme,
@@ -89,6 +131,8 @@ void main() {
     iconTheme: iconTheme,
     inputDecorationTheme: inputDecorationTheme,
     listTileTheme: listTileThemeData,
+    elevatedButtonTheme: elevatedButtonThemeData,
+    outlinedButtonTheme: outlinedButtonThemeData,
   );
 
   runApp(
