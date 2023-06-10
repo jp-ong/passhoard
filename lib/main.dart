@@ -41,6 +41,35 @@ void main() {
 
   IconThemeData iconTheme = const IconThemeData(size: 16);
 
+  InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
+    hintStyle: TextStyle(fontSize: 14, color: whiteDark),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(20),
+      borderSide: BorderSide.none,
+    ),
+    filled: true,
+    fillColor: blackLight,
+    contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+  );
+
+  ListTileThemeData listTileThemeData = ListTileThemeData(
+    tileColor: blackLight,
+    titleTextStyle: TextStyle(
+      fontWeight: FontWeight.w600,
+      fontSize: 16,
+      color: whiteLight,
+    ),
+    subtitleTextStyle: TextStyle(
+      fontWeight: FontWeight.normal,
+      fontSize: 12,
+      color: whiteDark,
+    ),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8),
+    ),
+    iconColor: blueLight,
+  );
+
   ThemeData darkTheme = ThemeData(
     textTheme: GoogleFonts.rubikTextTheme(const TextTheme()),
     colorScheme: ColorScheme.dark(
@@ -51,11 +80,15 @@ void main() {
       onPrimary: blackDark,
       primaryContainer: blueDark,
       onPrimaryContainer: whiteLight,
+      surface: blackLight,
+      onSurface: whiteDark,
     ),
     scaffoldBackgroundColor: blackDark,
     appBarTheme: appBarTheme,
     iconButtonTheme: iconButtonTheme,
     iconTheme: iconTheme,
+    inputDecorationTheme: inputDecorationTheme,
+    listTileTheme: listTileThemeData,
   );
 
   runApp(
