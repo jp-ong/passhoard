@@ -99,6 +99,9 @@ void main() {
     ),
   );
 
+  FloatingActionButtonThemeData floatingActionButtonThemeData =
+      FloatingActionButtonThemeData(backgroundColor: blueLight);
+
   ThemeData darkTheme = ThemeData(
     textTheme: GoogleFonts.rubikTextTheme(
       TextTheme(
@@ -133,6 +136,7 @@ void main() {
     listTileTheme: listTileThemeData,
     elevatedButtonTheme: elevatedButtonThemeData,
     outlinedButtonTheme: outlinedButtonThemeData,
+    floatingActionButtonTheme: floatingActionButtonThemeData,
   );
 
   runApp(
