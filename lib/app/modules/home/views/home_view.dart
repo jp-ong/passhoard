@@ -61,7 +61,9 @@ class HomeView extends GetView<HomeController> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.toNamed(Routes.CREDENTIALS_FORM);
+        },
         child: const Icon(Icons.add_rounded),
       ),
     );
