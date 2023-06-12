@@ -74,7 +74,7 @@ void main() {
   ElevatedButtonThemeData elevatedButtonThemeData = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       elevation: 0,
-      minimumSize: const Size.fromHeight(40),
+      minimumSize: const Size(0, 40),
       textStyle: const TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w500,
@@ -88,7 +88,7 @@ void main() {
   OutlinedButtonThemeData outlinedButtonThemeData = OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
       elevation: 0,
-      minimumSize: const Size.fromHeight(40),
+      minimumSize: const Size(0, 40),
       textStyle: const TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w500,

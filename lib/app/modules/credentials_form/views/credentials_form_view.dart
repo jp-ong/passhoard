@@ -14,6 +14,7 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
         actions: [TextButton(onPressed: () {}, child: const Text('Save'))],
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -41,7 +42,7 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
                   ),
                   padding: const EdgeInsets.all(8),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const SizedBox(
                         height: 40,
@@ -67,21 +68,15 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
                           ),
                         ),
                       ),
-                      Visibility(
-                        visible: index + 1 == 2,
-                        child: const SizedBox(height: 4),
-                      ),
-                      Visibility(
-                        visible: index + 1 == 2,
-                        child: OutlinedButton(
-                          child: Text(
-                            'Remove',
-                            style: TextStyle(
-                              color: context.theme.colorScheme.error,
-                            ),
+                      const SizedBox(height: 4),
+                      OutlinedButton(
+                        child: Text(
+                          'Remove',
+                          style: TextStyle(
+                            color: context.theme.colorScheme.error,
                           ),
-                          onPressed: () {},
                         ),
+                        onPressed: () {},
                       ),
                     ],
                   ),
@@ -97,7 +92,64 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
             child: ElevatedButton.icon(
               icon: const Icon(Icons.add_rounded),
               label: const Text('Add Password'),
-              onPressed: () {},
+              onPressed: () {
+                Get.bottomSheet(
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: context.theme.colorScheme.surface,
+                      ),
+                      color: context.theme.colorScheme.background,
+                    ),
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const SizedBox(
+                          height: 40,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: "Username",
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        SizedBox(
+                          height: 40,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: "Password",
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  Icons.visibility_rounded,
+                                  size: 16,
+                                ),
+                                onPressed: () {},
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            OutlinedButton(
+                              child: const Text('Cancel'),
+                              onPressed: () {},
+                            ),
+                            const SizedBox(width: 8),
+                            ElevatedButton(
+                              child: const Text('Confirm'),
+                              onPressed: () {},
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
           ),
         ],
