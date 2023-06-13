@@ -68,7 +68,9 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
                       color: context.theme.colorScheme.error,
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.removeCredentialsItem(index);
+                  },
                 ),
               ],
             ),

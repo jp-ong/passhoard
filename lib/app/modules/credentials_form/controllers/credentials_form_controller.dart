@@ -12,6 +12,10 @@ class CredentialsFormController extends GetxController {
     Get.back();
   }
 
+  void removeCredentialsItem(int index) {
+    credentialsList.removeAt(index);
+  }
+
   @override
   void onReady() {
     super.onReady();
