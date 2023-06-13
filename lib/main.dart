@@ -83,6 +83,7 @@ void main() {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
+      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
     ),
   );
 
@@ -97,6 +98,7 @@ void main() {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
+      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
     ),
   );
 
@@ -111,6 +113,7 @@ void main() {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
+      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
     ),
   );
 
