@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:async/async.dart';
 
-import 'package:passhoard/app/modules/credentials_form/models/credential_model.dart';
+import 'package:passhoard/app/modules/credentials_form/models/credentials_model.dart';
 import 'package:passhoard/app/widgets/credentials_bottom_sheet.dart';
 
 class CredentialsFormController extends GetxController {

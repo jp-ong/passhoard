@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:passhoard/app/modules/credentials_form/models/credential_model.dart';
+import 'package:passhoard/app/modules/credentials_form/models/credentials_model.dart';
 
 class CredentialsBottomSheet extends StatelessWidget {
   final CredentialsModel credentials;
