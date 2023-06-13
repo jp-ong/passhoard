@@ -6,11 +6,12 @@ import 'package:passhoard/app/modules/credentials_form/models/credentials_model.
 import 'package:passhoard/app/widgets/credentials_bottom_sheet.dart';
 
 class CredentialsFormController extends GetxController {
+  CancelableOperation<void>? _debounceOperation;
+
+  TextEditingController credentialsGroupName = TextEditingController();
   RxList<CredentialsModel> credentialsList = RxList.empty(growable: true);
   Rx<CredentialsModel> newCredentials = Rx(CredentialsModel());
   RxBool isCredentialsValid = false.obs;
-  TextEditingController credentialsGroupName = TextEditingController();
-  CancelableOperation<void>? _debounceOperation;
 
   void onNewCredentialsConfirm() {
     credentialsList.add(newCredentials.value);
