@@ -6,6 +6,140 @@ import '../controllers/credentials_form_controller.dart';
 
 class CredentialsFormView extends GetView<CredentialsFormController> {
   const CredentialsFormView({Key? key}) : super(key: key);
+
+  Widget _buildPasswordList() {
+    return ListView.separated(
+      itemCount: 2,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemBuilder: (context, index) {
+        return Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              color: context.theme.colorScheme.surface,
+            ),
+          ),
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(
+                height: 40,
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: "Username",
+                  ),
+                ),
+              ),
+              const SizedBox(height: 4),
+              SizedBox(
+                height: 40,
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: "Password",
+                    suffixIcon: IconButton(
+                      icon: const Icon(
+                        Icons.visibility_rounded,
+                        size: 16,
+                      ),
+                      onPressed: () {},
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 4),
+              OutlinedButton(
+                child: Text(
+                  'Remove',
+                  style: TextStyle(
+                    color: context.theme.colorScheme.error,
+                  ),
+                ),
+                onPressed: () {},
+              ),
+            ],
+          ),
+        );
+      },
+      separatorBuilder: (context, index) {
+        return const SizedBox(height: 16);
+      },
+    );
+  }
+
+  Widget _buildGroupNameTextField() {
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: SizedBox(
+        height: 40,
+        child: TextField(
+          textAlign: TextAlign.center,
+          decoration: InputDecoration(
+            hintText: "Group Name",
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBottomSheet(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: context.theme.colorScheme.surface,
+        ),
+        color: context.theme.colorScheme.background,
+      ),
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(
+            height: 40,
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: "Username",
+              ),
+            ),
+          ),
+          const SizedBox(height: 4),
+          SizedBox(
+            height: 40,
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: "Password",
+                suffixIcon: IconButton(
+                  icon: const Icon(
+                    Icons.visibility_rounded,
+                    size: 16,
+                  ),
+                  onPressed: () {},
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 4),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              OutlinedButton(
+                child: const Text('Cancel'),
+                onPressed: () {},
+              ),
+              const SizedBox(width: 8),
+              ElevatedButton(
+                child: const Text('Confirm'),
+                onPressed: () {},
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,140 +150,19 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: SizedBox(
-              height: 40,
-              child: TextField(
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                  hintText: "Group Name",
-                ),
-              ),
-            ),
-          ),
+          _buildGroupNameTextField(),
           Expanded(
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               children: [
-                ListView.separated(
-                  itemCount: 2,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
-                          color: context.theme.colorScheme.surface,
-                        ),
-                      ),
-                      padding: const EdgeInsets.all(8),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          const SizedBox(
-                            height: 40,
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: "Username",
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          SizedBox(
-                            height: 40,
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: "Password",
-                                suffixIcon: IconButton(
-                                  icon: const Icon(
-                                    Icons.visibility_rounded,
-                                    size: 16,
-                                  ),
-                                  onPressed: () {},
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          OutlinedButton(
-                            child: Text(
-                              'Remove',
-                              style: TextStyle(
-                                color: context.theme.colorScheme.error,
-                              ),
-                            ),
-                            onPressed: () {},
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(height: 16);
-                  },
-                ),
+                _buildPasswordList(),
                 const SizedBox(height: 8),
                 TextButton.icon(
                   icon: const Icon(Icons.add_rounded),
                   label: const Text('Add Password'),
                   onPressed: () {
                     Get.bottomSheet(
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                            color: context.theme.colorScheme.surface,
-                          ),
-                          color: context.theme.colorScheme.background,
-                        ),
-                        padding: const EdgeInsets.all(8),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const SizedBox(
-                              height: 40,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  hintText: "Username",
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            SizedBox(
-                              height: 40,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  hintText: "Password",
-                                  suffixIcon: IconButton(
-                                    icon: const Icon(
-                                      Icons.visibility_rounded,
-                                      size: 16,
-                                    ),
-                                    onPressed: () {},
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                OutlinedButton(
-                                  child: const Text('Cancel'),
-                                  onPressed: () {},
-                                ),
-                                const SizedBox(width: 8),
-                                ElevatedButton(
-                                  child: const Text('Confirm'),
-                                  onPressed: () {},
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
+                      _buildBottomSheet(context),
                     );
                   },
                 ),
