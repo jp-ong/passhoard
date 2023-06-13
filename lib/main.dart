@@ -99,6 +99,20 @@ void main() {
     ),
   );
 
+  TextButtonThemeData textButtonThemeData = TextButtonThemeData(
+    style: TextButton.styleFrom(
+      minimumSize: const Size(0, 40),
+      foregroundColor: whiteDark,
+      textStyle: const TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+    ),
+  );
+
   FloatingActionButtonThemeData floatingActionButtonThemeData =
       FloatingActionButtonThemeData(backgroundColor: blueLight);
 
@@ -136,6 +150,7 @@ void main() {
     listTileTheme: listTileThemeData,
     elevatedButtonTheme: elevatedButtonThemeData,
     outlinedButtonTheme: outlinedButtonThemeData,
+    textButtonTheme: textButtonThemeData,
     floatingActionButtonTheme: floatingActionButtonThemeData,
   );
 
