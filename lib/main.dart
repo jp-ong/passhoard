@@ -51,6 +51,7 @@ void main() {
     filled: true,
     fillColor: blackLight,
     contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+    constraints: const BoxConstraints(minHeight: 40, maxHeight: 40),
   );
 
   ListTileThemeData listTileThemeData = ListTileThemeData(
