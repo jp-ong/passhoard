@@ -11,7 +11,7 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Passhord'),
+        title: const Text('Passhoard'),
         centerTitle: true,
         actions: [
           IconButton(

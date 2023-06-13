@@ -163,7 +163,7 @@ void main() {
 
   runApp(
     GetMaterialApp(
-      title: "Passhord",
+      title: "Passhoard",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       themeMode: ThemeMode.dark,
