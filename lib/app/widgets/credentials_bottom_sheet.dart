@@ -4,12 +4,12 @@ import 'package:passhoard/app/modules/credentials_form/models/credential_model.d
 
 class CredentialsBottomSheet extends StatelessWidget {
   final CredentialsModel credentials;
-  final VoidCallback onConfirm;
+  final VoidCallback? onConfirm;
 
   const CredentialsBottomSheet({
     Key? key,
     required this.credentials,
-    required this.onConfirm,
+    this.onConfirm,
   }) : super(key: key);
 
   @override
@@ -73,10 +73,8 @@ class CredentialsBottomSheet extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   ElevatedButton(
+                    onPressed: onConfirm,
                     child: const Text('Confirm'),
-                    onPressed: () {
-                      onConfirm();
-                    },
                   ),
                 ],
               ),
