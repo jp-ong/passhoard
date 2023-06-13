@@ -86,7 +86,7 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
       CredentialsModel newCredentials = controller.newCredentials.value;
       return CredentialsBottomSheet(
         credentials: newCredentials,
-        onConfirm: () {},
+        onConfirm: controller.onNewCredentialsConfirm,
       );
     });
   }
@@ -104,7 +104,7 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
           _buildGroupNameTextField(),
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 80),
               children: [
                 _buildPasswordList(),
                 const SizedBox(height: 8),
