@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:passhoard/app/modules/credentials_form/models/credential_model.dart';
+import 'package:passhoard/app/widgets/credentials_bottom_sheet.dart';
 
 import '../controllers/credentials_form_controller.dart';
 
@@ -25,9 +26,9 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
       return ListView.separated(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: controller.credentials.length,
+        itemCount: controller.credentialsList.length,
         itemBuilder: (context, index) {
-          CredentialModel credential = controller.credentials[index];
+          CredentialsModel credential = controller.credentialsList[index];
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
@@ -82,73 +83,10 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
 
   Widget _buildBottomSheet(BuildContext context) {
     return Obx(() {
-      CredentialModel newCredential = controller.newCredential.value;
-      return Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color: context.theme.colorScheme.surface,
-          ),
-          color: context.theme.colorScheme.background,
-        ),
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextFormField(
-              decoration: const InputDecoration(
-                hintText: "Username",
-              ),
-              controller: newCredential.usernameController,
-            ),
-            const SizedBox(height: 8),
-            TextFormField(
-              decoration: InputDecoration(
-                hintText: "Password",
-                suffixIcon: IconButton(
-                  icon: const Icon(
-                    Icons.visibility_rounded,
-                    size: 16,
-                  ),
-                  onPressed: () {},
-                ),
-              ),
-              controller: newCredential.passwordController,
-            ),
-            const SizedBox(height: 8),
-            Flex(
-              direction: Axis.horizontal,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.autorenew_rounded),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.qr_code_scanner_rounded),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    TextButton(
-                      child: const Text('Cancel'),
-                      onPressed: () {},
-                    ),
-                    const SizedBox(width: 8),
-                    ElevatedButton(
-                      child: const Text('Confirm'),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
+      CredentialsModel newCredentials = controller.newCredentials.value;
+      return CredentialsBottomSheet(
+        credentials: newCredentials,
+        onConfirm: () {},
       );
     });
   }

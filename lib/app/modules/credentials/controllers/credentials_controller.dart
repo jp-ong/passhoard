@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class PasswordsController extends GetxController {
+class CredentialsController extends GetxController {
   //TODO: Implement PasswordsController
 
   final count = 0.obs;

@@ -6,8 +6,8 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/credentials_form/bindings/credentials_form_binding.dart';
 import '../modules/credentials_form/views/credentials_form_view.dart';
-import '../modules/passwords/bindings/passwords_binding.dart';
-import '../modules/passwords/views/passwords_view.dart';
+import '../modules/credentials/bindings/credentials_binding.dart';
+import '../modules/credentials/views/credentials_view.dart';
 
 part 'app_routes.dart';
 
@@ -23,9 +23,9 @@ class AppPages {
       binding: HomeBinding(),
     ),
     GetPage(
-      name: _Paths.PASSWORDS,
-      page: () => const PasswordsView(),
-      binding: PasswordsBinding(),
+      name: _Paths.CREDENTIALS,
+      page: () => const CredentialsView(),
+      binding: CredentialsBinding(),
     ),
     GetPage(
       name: _Paths.CREDENTIALS_FORM,

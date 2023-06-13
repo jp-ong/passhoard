@@ -49,7 +49,7 @@ class HomeView extends GetView<HomeController> {
                     title: const Text("Password Group"),
                     subtitle: Text(DateTime.now().toIso8601String()),
                     trailing: const Icon(Icons.chevron_right_rounded),
-                    onTap: () => Get.toNamed(Routes.PASSWORDS),
+                    onTap: () => Get.toNamed(Routes.CREDENTIALS),
                   );
                 },
                 separatorBuilder: (context, index) {

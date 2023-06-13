@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/passwords_controller.dart';
+import '../controllers/credentials_controller.dart';
 
-class PasswordsView extends GetView<PasswordsController> {
-  const PasswordsView({Key? key}) : super(key: key);
+class CredentialsView extends GetView<CredentialsController> {
+  const CredentialsView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
