@@ -40,7 +40,7 @@ void main() {
     ),
   );
 
-  IconThemeData iconTheme = const IconThemeData(size: 16);
+  IconThemeData iconTheme = IconThemeData(size: 16, color: blueLight);
 
   InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
     hintStyle: TextStyle(fontSize: 14, color: whiteDark),
@@ -76,6 +76,7 @@ void main() {
     style: ElevatedButton.styleFrom(
       elevation: 0,
       minimumSize: const Size(0, 40),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       textStyle: const TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w500,
@@ -91,6 +92,7 @@ void main() {
     style: OutlinedButton.styleFrom(
       elevation: 0,
       minimumSize: const Size(0, 40),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       textStyle: const TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w500,
@@ -104,12 +106,13 @@ void main() {
 
   TextButtonThemeData textButtonThemeData = TextButtonThemeData(
     style: TextButton.styleFrom(
-      minimumSize: const Size(0, 40),
       foregroundColor: whiteDark,
+      minimumSize: const Size(0, 40),
       textStyle: const TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w500,
       ),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
