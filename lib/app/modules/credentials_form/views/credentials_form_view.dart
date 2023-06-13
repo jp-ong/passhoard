@@ -21,7 +21,7 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
     );
   }
 
-  Widget _buildPasswordList() {
+  Widget _buildCredentialsList() {
     return Obx(() {
       return ListView.separated(
         shrinkWrap: true,
@@ -106,7 +106,7 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
             child: ListView(
               padding: const EdgeInsets.fromLTRB(16, 8, 16, 80),
               children: [
-                _buildPasswordList(),
+                _buildCredentialsList(),
                 const SizedBox(height: 8),
                 TextButton.icon(
                   icon: const Icon(Icons.add_rounded),
