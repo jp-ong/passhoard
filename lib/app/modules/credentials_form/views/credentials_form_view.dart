@@ -10,13 +10,15 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
   const CredentialsFormView({Key? key}) : super(key: key);
 
   Widget _buildGroupNameTextField() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: TextField(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: TextFormField(
         textAlign: TextAlign.center,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: "Group Name",
         ),
+        controller: controller.credentialsGroupName,
+        onChanged: (value) => controller.validateCredentials(),
       ),
     );
   }
@@ -59,6 +61,7 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
                     ),
                   ),
                   controller: credential.passwordController,
+                  onChanged: (value) => controller.validateCredentials(),
                 ),
                 const SizedBox(height: 8),
                 OutlinedButton(
@@ -98,7 +101,15 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('New Password'),
-        actions: [TextButton(onPressed: () {}, child: const Text('Save'))],
+        actions: [
+          Obx(() {
+            bool isCredentialsValid = controller.isCredentialsValid.isTrue;
+            return IconButton(
+              onPressed: isCredentialsValid ? () {} : null,
+              icon: const Icon(Icons.check_rounded),
+            );
+          })
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
