@@ -53,7 +53,12 @@ class HomeView extends GetView<HomeController> {
                         title: Text(controller.credentialKeys[index]),
                         subtitle: Text(DateTime.now().toIso8601String()),
                         trailing: const Icon(Icons.chevron_right_rounded),
-                        onTap: () => Get.toNamed(Routes.CREDENTIALS),
+                        onTap: () => Get.toNamed(
+                          Routes.CREDENTIALS,
+                          parameters: {
+                            'groupName': controller.credentialKeys[index]
+                          },
+                        ),
                       );
                     },
                     separatorBuilder: (context, index) {

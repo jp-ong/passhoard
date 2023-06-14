@@ -3,8 +3,16 @@ import 'package:get_storage/get_storage.dart';
 
 class CredentialsController extends GetxController {
   final box = GetStorage('passhoard');
+  String groupName = Get.parameters['groupName'] ?? '';
 
   void loadCredentials() {
-    print(box.read('fgdgfdg'));
+    print(box.read(groupName));
+  }
+
+  @override
+  void onReady() {
+    // TODO: implement onReady
+    super.onReady();
+    loadCredentials();
   }
 }

@@ -10,7 +10,7 @@ class CredentialsView extends GetView<CredentialsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Group Name'),
+        title: Text(controller.groupName),
         actions: [TextButton(onPressed: () {}, child: const Text('Save'))],
       ),
       body: Column(
