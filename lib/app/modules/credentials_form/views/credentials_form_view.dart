@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:passhoard/app/models/credentials_model.dart';
+import 'package:passhoard/app/models/credentials_input_model.dart';
 import 'package:passhoard/app/widgets/credentials_bottom_sheet.dart';
 
 import '../controllers/credentials_form_controller.dart';
@@ -29,9 +29,10 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
       return ListView.separated(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: controller.credentialsList.length,
+        itemCount: controller.credentialsInputList.length,
         itemBuilder: (context, index) {
-          CredentialsModel credential = controller.credentialsList[index];
+          CredentialsInputModel credential =
+              controller.credentialsInputList[index];
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
@@ -91,7 +92,8 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
 
   Widget _buildBottomSheet(BuildContext context) {
     return Obx(() {
-      CredentialsModel newCredentials = controller.newCredentials.value;
+      CredentialsInputModel newCredentials =
+          controller.newCredentialsInput.value;
       return CredentialsBottomSheet(
         credentials: newCredentials,
         onConfirm: controller.onNewCredentialsConfirm,

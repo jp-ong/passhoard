@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:passhoard/app/models/credentials_model.dart';
+import 'package:passhoard/app/models/credentials_input_model.dart';
 
 class CredentialsBottomSheet extends StatelessWidget {
-  final CredentialsModel credentials;
+  final CredentialsInputModel credentials;
   final VoidCallback? onConfirm;
 
   const CredentialsBottomSheet({
