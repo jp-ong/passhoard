@@ -43,7 +43,11 @@ void main() {
   IconThemeData iconTheme = IconThemeData(size: 16, color: blueLight);
 
   InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
-    hintStyle: TextStyle(fontSize: 14, color: whiteDark),
+    hintStyle: TextStyle(
+      color: whiteDark,
+      fontSize: 14,
+      fontWeight: FontWeight.normal,
+    ),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(20),
       borderSide: BorderSide.none,
@@ -133,6 +137,24 @@ void main() {
         titleSmall: TextStyle(
           fontSize: 12,
           color: whiteDark,
+        ),
+        bodyMedium: TextStyle(
+          fontSize: 14,
+          color: whiteLight,
+        ),
+        bodySmall: TextStyle(
+          fontSize: 12,
+          color: whiteLight,
+        ),
+        displayMedium: TextStyle(
+          fontSize: 14,
+          color: whiteLight,
+          fontWeight: FontWeight.w500,
+        ),
+        displaySmall: TextStyle(
+          fontSize: 12,
+          color: whiteLight,
+          fontWeight: FontWeight.w500,
         ),
       ),
     ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
+
 import 'package:passhoard/app/routes/app_pages.dart';
 
 import '../controllers/home_controller.dart';
@@ -26,12 +26,13 @@ class HomeView extends GetView<HomeController> {
       ),
       body: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: SizedBox(
               height: 40,
               child: TextField(
-                decoration: InputDecoration(
+                style: context.textTheme.displayMedium,
+                decoration: const InputDecoration(
                   hintText: "Search",
                   prefixIcon: Icon(Icons.search_rounded, size: 16),
                 ),

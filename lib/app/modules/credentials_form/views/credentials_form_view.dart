@@ -9,10 +9,11 @@ import '../controllers/credentials_form_controller.dart';
 class CredentialsFormView extends GetView<CredentialsFormController> {
   const CredentialsFormView({Key? key}) : super(key: key);
 
-  Widget _buildGroupNameTextField() {
+  Widget _buildGroupNameTextField(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: TextFormField(
+        style: context.textTheme.displayMedium,
         textAlign: TextAlign.center,
         decoration: const InputDecoration(
           hintText: "Group Name",
@@ -43,6 +44,7 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 TextFormField(
+                  style: context.textTheme.displayMedium,
                   decoration: const InputDecoration(
                     hintText: "Username",
                   ),
@@ -50,6 +52,7 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
                 ),
                 const SizedBox(height: 8),
                 TextFormField(
+                  style: context.textTheme.displayMedium,
                   decoration: InputDecoration(
                     hintText: "Password",
                     suffixIcon: IconButton(
@@ -114,7 +117,7 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _buildGroupNameTextField(),
+          _buildGroupNameTextField(context),
           Expanded(
             child: ListView(
               padding: const EdgeInsets.fromLTRB(16, 8, 16, 80),

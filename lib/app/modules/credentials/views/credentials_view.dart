@@ -16,7 +16,7 @@ class CredentialsView extends GetView<CredentialsController> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _buildGroupNameTextField(),
+          _buildGroupNameTextField(context),
           Expanded(
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -32,14 +32,15 @@ class CredentialsView extends GetView<CredentialsController> {
     );
   }
 
-  Widget _buildGroupNameTextField() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+  Widget _buildGroupNameTextField(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: SizedBox(
         height: 40,
         child: TextField(
+          style: context.textTheme.displayMedium,
           textAlign: TextAlign.center,
-          decoration: InputDecoration(hintText: "Group Name"),
+          decoration: const InputDecoration(hintText: "Group Name"),
         ),
       ),
     );
@@ -78,11 +79,12 @@ class CredentialsView extends GetView<CredentialsController> {
           const SizedBox(height: 4),
           Row(
             children: [
-              const Expanded(
+              Expanded(
                 child: SizedBox(
                   height: 40,
                   child: TextField(
-                    decoration: InputDecoration(
+                    style: context.textTheme.displayMedium,
+                    decoration: const InputDecoration(
                       hintText: "Username",
                     ),
                   ),
@@ -104,6 +106,7 @@ class CredentialsView extends GetView<CredentialsController> {
                 child: SizedBox(
                   height: 40,
                   child: TextField(
+                    style: context.textTheme.displayMedium,
                     decoration: InputDecoration(
                       hintText: "Password",
                       suffixIcon: IconButton(
@@ -184,10 +187,11 @@ class CredentialsView extends GetView<CredentialsController> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(
+          SizedBox(
             height: 40,
             child: TextField(
-              decoration: InputDecoration(
+              style: context.textTheme.displayMedium,
+              decoration: const InputDecoration(
                 hintText: "Username",
               ),
             ),
@@ -196,6 +200,7 @@ class CredentialsView extends GetView<CredentialsController> {
           SizedBox(
             height: 40,
             child: TextField(
+              style: context.textTheme.displayMedium,
               decoration: InputDecoration(
                 hintText: "Password",
                 suffixIcon: IconButton(

@@ -27,6 +27,7 @@ class CredentialsBottomSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           TextFormField(
+            style: context.textTheme.displayMedium,
             decoration: const InputDecoration(
               hintText: "Username",
             ),
@@ -34,6 +35,7 @@ class CredentialsBottomSheet extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           TextFormField(
+            style: context.textTheme.displayMedium,
             decoration: InputDecoration(
               hintText: "Password",
               suffixIcon: IconButton(
