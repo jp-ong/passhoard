@@ -1,23 +1,10 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class CredentialsController extends GetxController {
-  //TODO: Implement PasswordsController
+  final box = GetStorage('passhoard');
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  void loadCredentials() {
+    print(box.read('fgdgfdg'));
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

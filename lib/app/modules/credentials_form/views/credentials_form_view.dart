@@ -96,7 +96,7 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
           controller.newCredentialsInput.value;
       return CredentialsBottomSheet(
         credentials: newCredentials,
-        onConfirm: controller.onNewCredentialsConfirm,
+        onConfirm: controller.onAddPasswordConfirm,
       );
     });
   }
@@ -110,7 +110,8 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
           Obx(() {
             bool isCredentialsValid = controller.isCredentialsValid.isTrue;
             return IconButton(
-              onPressed: isCredentialsValid ? () {} : null,
+              onPressed:
+                  isCredentialsValid ? controller.onCredentialsConfirm : null,
               icon: const Icon(Icons.check_rounded),
             );
           })
