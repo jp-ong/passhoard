@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:passhoard/app/models/credentials_input_model.dart';
 
 class CredentialsBottomSheet extends StatelessWidget {
-  final CredentialsInputModel credentials;
-  final VoidCallback? onConfirm;
-
   const CredentialsBottomSheet({
     Key? key,
-    required this.credentials,
-    this.onConfirm,
   }) : super(key: key);
 
   @override
@@ -31,7 +25,6 @@ class CredentialsBottomSheet extends StatelessWidget {
             decoration: const InputDecoration(
               hintText: "Username",
             ),
-            controller: credentials.usernameController,
           ),
           const SizedBox(height: 8),
           TextFormField(
@@ -46,7 +39,6 @@ class CredentialsBottomSheet extends StatelessWidget {
                 onPressed: () {},
               ),
             ),
-            controller: credentials.passwordController,
           ),
           const SizedBox(height: 8),
           Flex(
@@ -75,7 +67,7 @@ class CredentialsBottomSheet extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   ElevatedButton(
-                    onPressed: onConfirm,
+                    onPressed: () {},
                     child: const Text('Confirm'),
                   ),
                 ],

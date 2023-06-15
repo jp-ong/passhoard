@@ -16,7 +16,7 @@ class HomeView extends GetView<HomeController> {
         actions: [
           IconButton(
             icon: const Icon(Icons.settings_rounded),
-            onPressed: controller.loadCredentialKeys,
+            onPressed: () {},
           ),
         ],
         leading: IconButton(
@@ -42,31 +42,21 @@ class HomeView extends GetView<HomeController> {
           Expanded(
             child: Material(
               color: Colors.transparent,
-              child: Obx(() {
-                return Visibility(
-                  visible: controller.isCredentialsLoading.isFalse,
-                  child: ListView.separated(
-                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 80),
-                    itemCount: controller.credentialKeys.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(controller.credentialKeys[index]),
-                        subtitle: Text(DateTime.now().toIso8601String()),
-                        trailing: const Icon(Icons.chevron_right_rounded),
-                        onTap: () => Get.toNamed(
-                          Routes.CREDENTIALS,
-                          parameters: {
-                            'groupName': controller.credentialKeys[index]
-                          },
-                        ),
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(height: 8);
-                    },
-                  ),
-                );
-              }),
+              child: ListView.separated(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 80),
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: const Text("Group Name"),
+                    subtitle: Text(DateTime.now().toIso8601String()),
+                    trailing: const Icon(Icons.chevron_right_rounded),
+                    onTap: () => Get.toNamed(Routes.CREDENTIALS),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(height: 8);
+                },
+              ),
             ),
           ),
         ],

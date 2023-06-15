@@ -1,18 +1,3 @@
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
-class HomeController extends GetxController {
-  final box = GetStorage('passhoard');
-  RxList<String> credentialKeys = RxList.empty(growable: true);
-  RxBool isCredentialsLoading = false.obs;
-
-  void loadCredentialKeys() {
-    credentialKeys.value = [...box.read('passhoard-keys')];
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-    loadCredentialKeys();
-  }
-}
+class HomeController extends GetxController {}
