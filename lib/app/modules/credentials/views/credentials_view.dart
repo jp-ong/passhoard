@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:passhoard/app/models/credentials_input_model.dart';
+import 'package:passhoard/app/models/credentials_model.dart';
 import 'package:passhoard/app/widgets/credentials_bottom_sheet.dart';
 
 import '../controllers/credentials_controller.dart';
@@ -12,35 +14,44 @@ class CredentialsView extends GetView<CredentialsController> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: SizedBox(
         height: 40,
-        child: TextField(
+        child: TextFormField(
           style: context.textTheme.displayMedium,
           textAlign: TextAlign.center,
           decoration: const InputDecoration(hintText: "Group Name"),
+          controller: controller.credentialGroupNameInput,
         ),
       ),
     );
   }
 
-  Widget _buildPasswordList() {
-    return ListView.separated(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: 1,
-      itemBuilder: (context, index) {
-        return _buildPasswordItem(context);
-      },
-      separatorBuilder: (context, index) {
-        return const SizedBox(height: 16);
-      },
-    );
+  Widget _buildCredentialsList() {
+    return Obx(() {
+      return ListView.separated(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: controller.credentialInputs.length,
+        itemBuilder: (context, index) {
+          return _buildCredentials(
+            controller.credentials[index],
+            controller.credentialInputs[index],
+          );
+        },
+        separatorBuilder: (context, index) {
+          return const SizedBox(height: 16);
+        },
+      );
+    });
   }
 
-  Widget _buildPasswordItem(BuildContext context) {
+  Widget _buildCredentials(
+    Credentials credentials,
+    CredentialsInput credentialsInput,
+  ) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: context.theme.colorScheme.surface,
+          color: Get.theme.colorScheme.surface,
         ),
       ),
       padding: const EdgeInsets.all(8),
@@ -48,8 +59,8 @@ class CredentialsView extends GetView<CredentialsController> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            DateTime.now().toIso8601String(),
-            style: context.textTheme.titleSmall,
+            credentials.lastModified.toIso8601String(),
+            style: Get.textTheme.titleSmall,
           ),
           const SizedBox(height: 4),
           Row(
@@ -57,18 +68,19 @@ class CredentialsView extends GetView<CredentialsController> {
               Expanded(
                 child: SizedBox(
                   height: 40,
-                  child: TextField(
-                    style: context.textTheme.displayMedium,
+                  child: TextFormField(
+                    style: Get.textTheme.displayMedium,
                     decoration: const InputDecoration(
                       hintText: "Username",
                     ),
+                    controller: credentialsInput.usernameController,
                   ),
                 ),
               ),
               IconButton(
                 icon: Icon(
                   Icons.copy_all_rounded,
-                  color: context.theme.colorScheme.primary,
+                  color: Get.theme.colorScheme.primary,
                 ),
                 onPressed: () {},
               ),
@@ -80,8 +92,8 @@ class CredentialsView extends GetView<CredentialsController> {
               Expanded(
                 child: SizedBox(
                   height: 40,
-                  child: TextField(
-                    style: context.textTheme.displayMedium,
+                  child: TextFormField(
+                    style: Get.textTheme.displayMedium,
                     decoration: InputDecoration(
                       hintText: "Password",
                       suffixIcon: IconButton(
@@ -92,13 +104,14 @@ class CredentialsView extends GetView<CredentialsController> {
                         onPressed: () {},
                       ),
                     ),
+                    controller: credentialsInput.passwordController,
                   ),
                 ),
               ),
               IconButton(
                 icon: Icon(
                   Icons.copy_all_rounded,
-                  color: context.theme.colorScheme.primary,
+                  color: Get.theme.colorScheme.primary,
                 ),
                 onPressed: () {},
               ),
@@ -111,12 +124,12 @@ class CredentialsView extends GetView<CredentialsController> {
                 child: OutlinedButton.icon(
                   icon: Icon(
                     Icons.delete_rounded,
-                    color: context.theme.colorScheme.error,
+                    color: Get.theme.colorScheme.error,
                   ),
                   label: Text(
                     'Delete',
                     style: TextStyle(
-                      color: context.theme.colorScheme.error,
+                      color: Get.theme.colorScheme.error,
                     ),
                   ),
                   onPressed: () {},
@@ -168,7 +181,7 @@ class CredentialsView extends GetView<CredentialsController> {
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               children: [
-                _buildPasswordList(),
+                _buildCredentialsList(),
                 const SizedBox(height: 8),
                 _buildAddPasswordButton(context),
               ],

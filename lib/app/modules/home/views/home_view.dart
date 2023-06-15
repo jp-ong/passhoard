@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:passhoard/app/models/credential_group_model.dart';
 
 import 'package:passhoard/app/routes/app_pages.dart';
 
@@ -44,13 +45,19 @@ class HomeView extends GetView<HomeController> {
               color: Colors.transparent,
               child: ListView.separated(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 80),
-                itemCount: 5,
+                itemCount: controller.credentialGroups.length,
                 itemBuilder: (context, index) {
+                  CredentialGroup cg = controller.credentialGroups[index];
                   return ListTile(
-                    title: const Text("Group Name"),
-                    subtitle: Text(DateTime.now().toIso8601String()),
+                    title: Text(cg.groupName),
+                    subtitle: Text(cg.lastModified.toIso8601String()),
                     trailing: const Icon(Icons.chevron_right_rounded),
-                    onTap: () => Get.toNamed(Routes.CREDENTIALS),
+                    onTap: () {
+                      Get.toNamed(
+                        Routes.CREDENTIALS,
+                        arguments: cg.groupId,
+                      );
+                    },
                   );
                 },
                 separatorBuilder: (context, index) {

@@ -1,14 +1,18 @@
+import 'package:passhoard/app/utils/uuid_generator.dart';
+
 class Credentials {
   String credentialsId;
   String username;
   String password;
   DateTime lastModified;
+  String groupId;
 
   Credentials(
     this.username,
-    this.password, {
+    this.password,
+    this.groupId, {
     credentialsId,
     lastModified,
-  })  : credentialsId = "123",
+  })  : credentialsId = credentialsId ?? generateUUID(),
         lastModified = DateTime.now();
 }
