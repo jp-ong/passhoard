@@ -11,7 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   Color blackDark = const Color(0xFF202223);
-  Color blackLight = const Color(0xFF252728);
+  Color blackLight = const Color(0xFF2D2E2F);
 
   Color redDark = const Color(0xFF733826);
   Color redLight = const Color(0xFFFF754C);
