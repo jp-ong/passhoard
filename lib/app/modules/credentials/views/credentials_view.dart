@@ -119,29 +119,19 @@ class CredentialsView extends GetView<CredentialsController> {
           ),
           const SizedBox(height: 4),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                child: OutlinedButton.icon(
-                  icon: Icon(
-                    Icons.delete_rounded,
-                    color: Get.theme.colorScheme.error,
-                  ),
-                  label: Text(
-                    'Delete',
-                    style: TextStyle(
-                      color: Get.theme.colorScheme.error,
-                    ),
-                  ),
-                  onPressed: () {},
+              IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.delete_rounded,
+                  color: Get.theme.colorScheme.error,
                 ),
               ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: OutlinedButton.icon(
-                  icon: const Icon(Icons.qr_code_rounded),
-                  label: const Text('Generate QR'),
-                  onPressed: () {},
-                ),
+              OutlinedButton.icon(
+                icon: const Icon(Icons.qr_code_rounded),
+                label: const Text('Generate QR'),
+                onPressed: () {},
               ),
             ],
           )
