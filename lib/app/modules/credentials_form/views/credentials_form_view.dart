@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:passhoard/app/models/credentials_input_model.dart';
 import 'package:passhoard/app/widgets/credentials_bottom_sheet.dart';
 
 import '../controllers/credentials_form_controller.dart';
@@ -12,81 +13,110 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: TextFormField(
+        decoration: const InputDecoration(
+          hintText: "Enter Group Name",
+        ),
         style: context.textTheme.displayMedium,
         textAlign: TextAlign.center,
-        decoration: const InputDecoration(
-          hintText: "Group Name",
-        ),
+        controller: controller.groupNameInput,
       ),
     );
   }
 
   Widget _buildCredentialsList() {
-    return ListView.separated(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: 5,
-      itemBuilder: (context, index) {
-        return Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: context.theme.colorScheme.surface,
+    return Obx(() {
+      return ListView.separated(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: controller.credentialsInput.length,
+        itemBuilder: (context, index) {
+          CredentialsInput ci = controller.credentialsInput[index];
+          return Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: context.theme.colorScheme.surface,
+              ),
             ),
-          ),
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextFormField(
-                style: context.textTheme.displayMedium,
-                decoration: const InputDecoration(
-                  hintText: "Username",
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                TextFormField(
+                  decoration: const InputDecoration(
+                    hintText: "Username",
+                  ),
+                  style: context.textTheme.displayMedium,
+                  controller: ci.usernameController,
                 ),
-              ),
-              const SizedBox(height: 8),
-              TextFormField(
-                style: context.textTheme.displayMedium,
-                decoration: InputDecoration(
-                  hintText: "Password",
-                  suffixIcon: IconButton(
-                    icon: const Icon(
-                      Icons.visibility_rounded,
-                      size: 16,
+                const SizedBox(height: 8),
+                TextFormField(
+                  obscureText: ci.hidePassword,
+                  decoration: InputDecoration(
+                    hintText: "Password",
+                    suffixIcon: Material(
+                      color: Colors.transparent,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.visibility_rounded,
+                          size: 16,
+                        ),
+                        onPressed: () {
+                          controller.obscurePassword(ci);
+                        },
+                      ),
                     ),
-                    onPressed: () {},
                   ),
+                  style: context.textTheme.displayMedium,
+                  controller: ci.passwordController,
                 ),
-              ),
-              const SizedBox(height: 8),
-              OutlinedButton(
-                child: Text(
-                  'Remove',
-                  style: TextStyle(
-                    color: context.theme.colorScheme.error,
-                  ),
+                const SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.delete_rounded,
+                        color: Get.theme.colorScheme.error,
+                      ),
+                      onPressed: () {
+                        controller.removeCredentials(index);
+                      },
+                    ),
+                    OutlinedButton.icon(
+                      icon: const Icon(Icons.autorenew_rounded),
+                      label: const Text('Generate Password'),
+                      onPressed: () {
+                        controller.refreshPassword(ci);
+                      },
+                    ),
+                  ],
                 ),
-                onPressed: () {},
-              ),
-            ],
-          ),
-        );
-      },
-      separatorBuilder: (context, index) {
-        return const SizedBox(height: 16);
-      },
-    );
+              ],
+            ),
+          );
+        },
+        separatorBuilder: (context, index) {
+          return const SizedBox(height: 16);
+        },
+      );
+    });
   }
 
-  Widget _buildBottomSheet(BuildContext context) {
-    return const CredentialsBottomSheet();
+  Widget _buildBottomSheet() {
+    return Obx(() {
+      return CredentialsBottomSheet(
+        credentialsInput: controller.newCredentials.value,
+        onConfirm: controller.onNewCredentialsConfirm,
+      );
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('New Password'),
+        title: const Text('New Group'),
         actions: [
           IconButton(
             onPressed: () {},
@@ -108,7 +138,7 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
                   icon: const Icon(Icons.add_rounded),
                   label: const Text('Add Password'),
                   onPressed: () {
-                    Get.bottomSheet(_buildBottomSheet(context));
+                    Get.bottomSheet(_buildBottomSheet());
                   },
                 ),
               ],

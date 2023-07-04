@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:passhoard/app/models/credentials_input_model.dart';
+import 'package:passhoard/app/utils/password_generator.dart';
 
 class CredentialsBottomSheet extends StatelessWidget {
+  final CredentialsInput ci;
+  final VoidCallback onConfirm;
+
   const CredentialsBottomSheet({
     Key? key,
-  }) : super(key: key);
+    required CredentialsInput credentialsInput,
+    required this.onConfirm,
+  })  : ci = credentialsInput,
+        super(key: key);
+
+  void _refreshPassword() {
+    ci.passwordController.text = generatePassword();
+  }
+
+  void _obscurePassword() {
+    ci.hidePassword = !ci.hidePassword;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,33 +28,37 @@ class CredentialsBottomSheet extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: context.theme.colorScheme.surface,
+          color: Get.theme.colorScheme.surface,
         ),
-        color: context.theme.colorScheme.background,
+        color: Get.theme.colorScheme.background,
       ),
       padding: const EdgeInsets.all(8),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           TextFormField(
-            style: context.textTheme.displayMedium,
             decoration: const InputDecoration(
               hintText: "Username",
             ),
+            style: Get.textTheme.displayMedium,
+            controller: ci.usernameController,
           ),
           const SizedBox(height: 8),
           TextFormField(
-            style: context.textTheme.displayMedium,
             decoration: InputDecoration(
               hintText: "Password",
-              suffixIcon: IconButton(
-                icon: const Icon(
-                  Icons.visibility_rounded,
-                  size: 16,
+              suffixIcon: Ink(
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.visibility_rounded,
+                    size: 16,
+                  ),
+                  onPressed: _obscurePassword,
                 ),
-                onPressed: () {},
               ),
             ),
+            style: Get.textTheme.displayMedium,
+            controller: ci.passwordController,
           ),
           const SizedBox(height: 8),
           Flex(
@@ -48,8 +68,8 @@ class CredentialsBottomSheet extends StatelessWidget {
               Row(
                 children: [
                   IconButton(
-                    onPressed: () {},
                     icon: const Icon(Icons.autorenew_rounded),
+                    onPressed: _refreshPassword,
                   ),
                   IconButton(
                     onPressed: () {},
@@ -67,7 +87,7 @@ class CredentialsBottomSheet extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: onConfirm,
                     child: const Text('Confirm'),
                   ),
                 ],

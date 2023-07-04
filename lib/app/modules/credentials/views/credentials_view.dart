@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:passhoard/app/models/credentials_input_model.dart';
 import 'package:passhoard/app/models/credentials_model.dart';
-import 'package:passhoard/app/widgets/credentials_bottom_sheet.dart';
+// import 'package:passhoard/app/widgets/credentials_bottom_sheet.dart';
 
 import '../controllers/credentials_controller.dart';
 
@@ -134,7 +134,7 @@ class CredentialsView extends GetView<CredentialsController> {
                 onPressed: () {},
               ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -145,16 +145,18 @@ class CredentialsView extends GetView<CredentialsController> {
       icon: const Icon(Icons.add_rounded),
       label: const Text('Add Password'),
       onPressed: () {
-        Get.bottomSheet(
-          _buildBottomSheet(context),
-        );
+        // Get.bottomSheet(
+        //   _buildBottomSheet(),
+        // );
       },
     );
   }
 
-  Widget _buildBottomSheet(BuildContext context) {
-    return const CredentialsBottomSheet();
-  }
+  // Widget _buildBottomSheet() {
+  //   return CredentialsBottomSheet(
+  //     credentialsInput: controller.newCredentials.value,
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {

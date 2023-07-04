@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:passhoard/app/models/credential_group_model.dart';
+import 'package:passhoard/app/models/credentials_group_model.dart';
 
 import 'package:passhoard/app/routes/app_pages.dart';
 
@@ -47,7 +47,7 @@ class HomeView extends GetView<HomeController> {
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 80),
                 itemCount: controller.credentialGroups.length,
                 itemBuilder: (context, index) {
-                  CredentialGroup cg = controller.credentialGroups[index];
+                  CredentialsGroup cg = controller.credentialGroups[index];
                   return ListTile(
                     title: Text(cg.groupName),
                     subtitle: Text(cg.lastModified.toIso8601String()),

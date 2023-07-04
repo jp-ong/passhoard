@@ -1,8 +1,9 @@
 import 'package:flutter/widgets.dart';
 
 class CredentialsInput {
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController usernameController;
+  TextEditingController passwordController;
+  bool hidePassword = true;
 
   CredentialsInput(this.usernameController, this.passwordController);
 
@@ -10,6 +11,13 @@ class CredentialsInput {
     return CredentialsInput(
       TextEditingController(text: username),
       TextEditingController(text: password),
+    );
+  }
+
+  factory CredentialsInput.empty() {
+    return CredentialsInput(
+      TextEditingController(),
+      TextEditingController(),
     );
   }
 }
