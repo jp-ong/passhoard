@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:passhoard/app/models/credentials_group_model.dart';
+import 'package:passhoard/app/models/credential_group_model.dart';
 
 import 'package:passhoard/app/routes/app_pages.dart';
 
@@ -43,27 +43,32 @@ class HomeView extends GetView<HomeController> {
           Expanded(
             child: Material(
               color: Colors.transparent,
-              child: ListView.separated(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 80),
-                itemCount: controller.credentialGroups.length,
-                itemBuilder: (context, index) {
-                  CredentialsGroup cg = controller.credentialGroups[index];
-                  return ListTile(
-                    title: Text(cg.groupName),
-                    subtitle: Text(cg.lastModified.toIso8601String()),
-                    trailing: const Icon(Icons.chevron_right_rounded),
-                    onTap: () {
-                      Get.toNamed(
-                        Routes.CREDENTIALS,
-                        arguments: cg.groupId,
+              child: Obx(() {
+                return Visibility(
+                  visible: controller.credentialGroups.isNotEmpty,
+                  child: ListView.separated(
+                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 80),
+                    itemCount: controller.credentialGroups.length,
+                    itemBuilder: (context, index) {
+                      CredentialGroup cg = controller.credentialGroups[index];
+                      return ListTile(
+                        title: Text(cg.name),
+                        subtitle: Text(cg.updatedAt.toIso8601String()),
+                        trailing: const Icon(Icons.chevron_right_rounded),
+                        onTap: () {
+                          Get.toNamed(
+                            Routes.CREDENTIALS,
+                            arguments: cg.id,
+                          );
+                        },
                       );
                     },
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return const SizedBox(height: 8);
-                },
-              ),
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(height: 16);
+                    },
+                  ),
+                );
+              }),
             ),
           ),
         ],
