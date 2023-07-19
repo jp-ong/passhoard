@@ -1,11 +1,16 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'package:passhoard/app/models/credential_group_model.dart';
 
 class HomeController extends GetxController {
   final dio = Dio();
+  final API_BASE_URL = dotenv.env['API_BASE_URL'];
 
   RxBool isLoading = false.obs;
   RxList<CredentialGroup> credentialGroups = RxList.empty(growable: true);
@@ -13,18 +18,17 @@ class HomeController extends GetxController {
   void getCredentialGroups() async {
     try {
       final response = await dio.get(
-        'http://192.168.153.150:5000/api/credential-groups',
+        '$API_BASE_URL/api/credential-groups',
         options: Options(
           headers: {
             'Authorization':
-                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY1MzRjZWEwLWMzOTQtNGUxMC05OGMxLWNhNzhhN2RmNzUzNyIsImVtYWlsIjoiam9obnBhdWxvbmdAZW1haWwuY29tIiwiaWF0IjoxNjg5NjY0MDY1LCJleHAiOjE2ODk3MDcyNjV9.JGim5HPsnZCA1_mYm77YT4SpUfkOR_BMDVd-znu7aV0'
+                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUyMTk4MTQ2LTg2MWQtNGE2MC1iMjM4LWY3MDg2NTc3NzBmYSIsImVtYWlsIjoiam9obnBhdWxvbmdAZW1haWwuY29tIiwiaWF0IjoxNjg5Nzc2MjI2LCJleHAiOjE2ODk4MTk0MjZ9.Rm_N2Q9K3NUSLbjefU9bG1UEy0T5dnzm_1yX4ALiuwA'
           },
         ),
       );
 
       credentialGroups.value =
           credentialGroupsFromJson(jsonEncode(response.data));
-      print(response.data);
     } catch (e) {
       print(e);
     }
