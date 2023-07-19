@@ -46,26 +46,33 @@ class HomeView extends GetView<HomeController> {
               child: Obx(() {
                 return Visibility(
                   visible: controller.credentialGroups.isNotEmpty,
-                  child: ListView.separated(
-                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 80),
-                    itemCount: controller.credentialGroups.length,
-                    itemBuilder: (context, index) {
-                      CredentialGroup cg = controller.credentialGroups[index];
-                      return ListTile(
-                        title: Text(cg.name),
-                        subtitle: Text(cg.updatedAt.toIso8601String()),
-                        trailing: const Icon(Icons.chevron_right_rounded),
-                        onTap: () {
-                          Get.toNamed(
-                            Routes.CREDENTIALS,
-                            arguments: cg.id,
-                          );
-                        },
-                      );
+                  child: RefreshIndicator(
+                    onRefresh: () {
+                      return Future.delayed(const Duration(seconds: 1), () {
+                        controller.getCredentialGroups();
+                      });
                     },
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(height: 16);
-                    },
+                    child: ListView.separated(
+                      padding: const EdgeInsets.fromLTRB(16, 8, 16, 80),
+                      itemCount: controller.credentialGroups.length,
+                      itemBuilder: (context, index) {
+                        CredentialGroup cg = controller.credentialGroups[index];
+                        return ListTile(
+                          title: Text(cg.name),
+                          subtitle: Text(cg.updatedAt.toIso8601String()),
+                          trailing: const Icon(Icons.chevron_right_rounded),
+                          onTap: () {
+                            Get.toNamed(
+                              Routes.CREDENTIALS,
+                              arguments: cg.id,
+                            );
+                          },
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(height: 16);
+                      },
+                    ),
                   ),
                 );
               }),
