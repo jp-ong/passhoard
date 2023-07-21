@@ -107,7 +107,7 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
     return Obx(() {
       return CredentialsBottomSheet(
         credentialsInput: controller.newCredentials.value,
-        onConfirm: controller.onNewCredentialsConfirm,
+        onConfirm: controller.onBottomSheetConfirm,
       );
     });
   }
@@ -119,10 +119,16 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
         title: const Text('New Group'),
         actions: [
           IconButton(
-            onPressed: () {},
             icon: const Icon(Icons.check_rounded),
+            onPressed: controller.submitCredentials,
           ),
         ],
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Get.back(result: false);
+          },
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

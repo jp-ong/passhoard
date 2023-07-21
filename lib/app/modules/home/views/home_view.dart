@@ -70,7 +70,7 @@ class HomeView extends GetView<HomeController> {
                         );
                       },
                       separatorBuilder: (context, index) {
-                        return const SizedBox(height: 16);
+                        return const SizedBox(height: 8);
                       },
                     ),
                   ),
@@ -81,8 +81,11 @@ class HomeView extends GetView<HomeController> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.toNamed(Routes.CREDENTIALS_FORM);
+        onPressed: () async {
+          final result = await Get.toNamed(Routes.CREDENTIALS_FORM);
+          if (result) {
+            controller.getCredentialGroups();
+          }
         },
         child: const Icon(Icons.add_rounded),
       ),
