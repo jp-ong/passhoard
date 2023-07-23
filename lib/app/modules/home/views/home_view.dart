@@ -64,7 +64,7 @@ class HomeView extends GetView<HomeController> {
                           onTap: () {
                             Get.toNamed(
                               Routes.CREDENTIALS,
-                              arguments: cg.id,
+                              arguments: {'credentialGroup': cg},
                             );
                           },
                         );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:passhoard/app/models/credentials_input_model.dart';
-import 'package:passhoard/app/models/credentials_model.dart';
+import 'package:passhoard/app/modules/credentials/models/credentials_model.dart';
 // import 'package:passhoard/app/widgets/credentials_bottom_sheet.dart';
 
 import '../controllers/credentials_controller.dart';
@@ -59,7 +59,7 @@ class CredentialsView extends GetView<CredentialsController> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            credentials.lastModified.toIso8601String(),
+            credentials.updatedAt.toIso8601String(),
             style: Get.textTheme.titleSmall,
           ),
           const SizedBox(height: 4),
