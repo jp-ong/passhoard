@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:passhoard/app/models/credentials_input_model.dart';
+import 'package:passhoard/app/models/credential_model.dart';
 import 'package:passhoard/app/utils/password_generator.dart';
 
 class CredentialsBottomSheet extends StatelessWidget {
-  final CredentialsInput ci;
+  final CredentialInput ci;
   final VoidCallback onConfirm;
 
   const CredentialsBottomSheet({
     Key? key,
-    required CredentialsInput credentialsInput,
+    required CredentialInput credentialsInput,
     required this.onConfirm,
   })  : ci = credentialsInput,
         super(key: key);
@@ -41,7 +41,7 @@ class CredentialsBottomSheet extends StatelessWidget {
               hintText: "Username",
             ),
             style: Get.textTheme.displayMedium,
-            controller: ci.usernameController,
+            controller: ci.identifierController,
           ),
           const SizedBox(height: 8),
           TextFormField(

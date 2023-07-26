@@ -8,25 +8,23 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 
 import 'package:passhoard/app/models/credential_group_model.dart';
-import 'package:passhoard/app/models/credentials_input_model.dart';
-import 'package:passhoard/app/modules/credentials/models/credentials_model.dart';
+import 'package:passhoard/app/models/credential_model.dart';
 
 class CredentialsController extends GetxController {
   final Dio _dio = Dio();
   final API_BASE_URL = dotenv.get('API_BASE_URL');
-  final CredentialGroup cg = Get.arguments['credentialGroup'];
+  final CredentialGroup credentialGroup = Get.arguments['credentialGroup'];
 
-  RxList<Credentials> credentials = RxList.empty(growable: true);
+  RxList<Credential> credentials = RxList.empty(growable: true);
 
   late TextEditingController credentialGroupNameInput;
-  RxList<CredentialsInput> credentialInputs = RxList.empty(growable: true);
 
   void getCredentials() async {
     try {
-      credentialGroupNameInput = TextEditingController(text: cg.name);
+      credentialGroupNameInput = credentialGroup.nameController();
 
       final response = await _dio.get(
-        '$API_BASE_URL/api/credentials/${cg.id}',
+        '$API_BASE_URL/api/credentials/${credentialGroup.id}',
         options: Options(
           headers: {
             'Authorization':
@@ -36,13 +34,6 @@ class CredentialsController extends GetxController {
       );
 
       credentials.value = credentialsFromJson(jsonEncode(response.data));
-
-      credentialInputs.addAll(credentials.map((c) {
-        return CredentialsInput(
-          TextEditingController(text: c.identifier),
-          TextEditingController(text: c.password),
-        );
-      }));
     } on DioException catch (e) {
       print(e);
     }

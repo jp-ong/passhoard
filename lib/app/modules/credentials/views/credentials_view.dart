@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:passhoard/app/models/credentials_input_model.dart';
-import 'package:passhoard/app/modules/credentials/models/credentials_model.dart';
+import 'package:passhoard/app/models/credential_model.dart';
 // import 'package:passhoard/app/widgets/credentials_bottom_sheet.dart';
 
 import '../controllers/credentials_controller.dart';
@@ -29,11 +28,10 @@ class CredentialsView extends GetView<CredentialsController> {
       return ListView.separated(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: controller.credentialInputs.length,
+        itemCount: controller.credentials.length,
         itemBuilder: (context, index) {
           return _buildCredentials(
             controller.credentials[index],
-            controller.credentialInputs[index],
           );
         },
         separatorBuilder: (context, index) {
@@ -43,10 +41,7 @@ class CredentialsView extends GetView<CredentialsController> {
     });
   }
 
-  Widget _buildCredentials(
-    Credentials credentials,
-    CredentialsInput credentialsInput,
-  ) {
+  Widget _buildCredentials(Credential credentials) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
@@ -73,7 +68,7 @@ class CredentialsView extends GetView<CredentialsController> {
                     decoration: const InputDecoration(
                       hintText: "Username",
                     ),
-                    controller: credentialsInput.usernameController,
+                    controller: credentials.identifierController(),
                   ),
                 ),
               ),
@@ -104,7 +99,7 @@ class CredentialsView extends GetView<CredentialsController> {
                         onPressed: () {},
                       ),
                     ),
-                    controller: credentialsInput.passwordController,
+                    controller: credentials.passwordController(),
                   ),
                 ),
               ),

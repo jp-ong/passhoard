@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:passhoard/app/models/credentials_input_model.dart';
+import 'package:passhoard/app/models/credential_model.dart';
 import 'package:passhoard/app/widgets/credentials_bottom_sheet.dart';
 
 import '../controllers/credentials_form_controller.dart';
@@ -28,9 +28,9 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
       return ListView.separated(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: controller.credentialsInput.length,
+        itemCount: controller.credentialInputs.length,
         itemBuilder: (context, index) {
-          CredentialsInput ci = controller.credentialsInput[index];
+          CredentialInput ci = controller.credentialInputs[index];
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
@@ -44,10 +44,10 @@ class CredentialsFormView extends GetView<CredentialsFormController> {
               children: [
                 TextFormField(
                   decoration: const InputDecoration(
-                    hintText: "Username",
+                    hintText: "Identifier",
                   ),
                   style: context.textTheme.displayMedium,
-                  controller: ci.usernameController,
+                  controller: ci.identifierController,
                 ),
                 const SizedBox(height: 8),
                 TextFormField(

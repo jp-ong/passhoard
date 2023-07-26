@@ -1,51 +1,49 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 
-import 'package:passhoard/app/models/credentials_input_model.dart';
-import 'package:passhoard/app/modules/credentials_form/models/new_credential_group_model.dart';
-import 'package:passhoard/app/modules/credentials_form/models/new_credentials_model.dart';
+import 'package:passhoard/app/models/credential_model.dart';
+import 'package:passhoard/app/models/credential_group_model.dart';
 import 'package:passhoard/app/utils/password_generator.dart';
 
 class CredentialsFormController extends GetxController {
   final Dio _dio = Dio();
   final API_BASE_URL = dotenv.env['API_BASE_URL'];
 
-  RxList<CredentialsInput> credentialsInput = RxList.empty(growable: true);
+  RxList<CredentialInput> credentialInputs = RxList.empty(growable: true);
   TextEditingController groupNameInput = TextEditingController();
-  Rx<CredentialsInput> newCredentials = Rx(CredentialsInput.empty());
+  Rx<CredentialInput> newCredentials = Rx(CredentialInput.empty());
 
   void onBottomSheetConfirm() {
-    credentialsInput.add(newCredentials.value);
-    newCredentials.value = CredentialsInput.empty();
+    credentialInputs.add(newCredentials.value);
+    newCredentials.value = CredentialInput.empty();
     Get.back();
   }
 
   void removeCredentials(int index) {
-    credentialsInput.removeAt(index);
+    credentialInputs.removeAt(index);
   }
 
-  void refreshPassword(CredentialsInput ci) {
+  void refreshPassword(CredentialInput ci) {
     ci.passwordController.text = generatePassword();
   }
 
-  void obscurePassword(CredentialsInput ci) {
+  void obscurePassword(CredentialInput ci) {
     ci.hidePassword = !ci.hidePassword;
-    credentialsInput.refresh();
+    credentialInputs.refresh();
   }
 
   void submitCredentials() async {
     try {
+      PostCredentialGroupDto postCredentialGroupReq =
+          PostCredentialGroupDto(name: groupNameInput.text);
+
       final response = await _dio.post(
         '$API_BASE_URL/api/credential-groups',
-        data: {
-          'name': groupNameInput.text,
-        },
+        data: postCredentialGroupReq.toPostJson(),
         options: Options(
           headers: {
             'Authorization':
@@ -54,22 +52,21 @@ class CredentialsFormController extends GetxController {
         ),
       );
 
-      NewCredentialGroup newCredentialGroup =
-          newCredentialGroupFromJson(jsonEncode(response.data));
+      CredentialGroup newCredentialGroup =
+          PostCredentialGroupDto.fromPostJson(response.data);
 
-      List<NewCredentials> credentials = credentialsInput.map((c) {
-        return NewCredentials(
-          identifier: c.usernameController.text,
-          password: c.passwordController.text,
-        );
+      List<Credential> credentials = credentialInputs.map((c) {
+        return c.getCredential();
       }).toList();
+
+      PostCredentialsDto newCredentials = PostCredentialsDto(
+        credentialGroupId: newCredentialGroup.id,
+        credentials: credentials,
+      );
 
       await _dio.post(
         '$API_BASE_URL/api/credentials',
-        data: {
-          'credentialGroupId': newCredentialGroup.id,
-          'credentials': jsonDecode(newCredentialsToJson(credentials))
-        },
+        data: newCredentials.toPostJson(),
         options: Options(
           headers: {
             'Authorization':

@@ -4,13 +4,14 @@
 
 import 'dart:convert';
 
-List<Credentials> credentialsFromJson(String str) => List<Credentials>.from(
-    json.decode(str).map((x) => Credentials.fromJson(x)));
+List<CredentialsDto> credentialsFromJson(String str) =>
+    List<CredentialsDto>.from(
+        json.decode(str).map((x) => CredentialsDto.fromJson(x)));
 
-String credentialsToJson(List<Credentials> data) =>
+String credentialsToJson(List<CredentialsDto> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Credentials {
+class CredentialsDto {
   String id;
   String identifier;
   String password;
@@ -19,7 +20,7 @@ class Credentials {
   DateTime createdAt;
   DateTime updatedAt;
 
-  Credentials({
+  CredentialsDto({
     required this.id,
     required this.identifier,
     required this.password,
@@ -29,7 +30,7 @@ class Credentials {
     required this.updatedAt,
   });
 
-  factory Credentials.fromJson(Map<String, dynamic> json) => Credentials(
+  factory CredentialsDto.fromJson(Map<String, dynamic> json) => CredentialsDto(
         id: json["id"],
         identifier: json["identifier"],
         password: json["password"],

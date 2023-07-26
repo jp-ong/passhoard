@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:passhoard/app/models/credential_group_model.dart';
 
 import 'package:passhoard/app/routes/app_pages.dart';
-
+import 'package:passhoard/app/models/credential_group_model.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
